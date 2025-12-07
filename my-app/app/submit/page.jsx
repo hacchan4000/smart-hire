@@ -5,6 +5,7 @@ import React, { useState } from 'react'
 const page = () => {
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
+    const [email2, setEmail2] = useState('')
     const [number, setNumber] = useState('')
     const [pesan, setPesan] = useState('')
 
@@ -33,10 +34,12 @@ const page = () => {
         alert('Something went wrong!')
         }
     }
-    
+
   return (
     <div className='relative w-full h-screen bg-[#0039C8] justify-center items-center flex-col text-white'>
-        <div className="w-full max-w-md ml-0 2xl:ml-50">
+        <h1 className='relative top-16 font-bold text-left leading-none w-full text-[min(10vw,100px)] mb-20'>SUBMIT YOUR VIDEO</h1>
+
+        <div className="w-full max-w-md ml-0 2xl:ml-10">
           <form
             onSubmit={onSubmited}
             className="flex flex-col items-center justify-center space-y-4 sm:space-y-5"
@@ -53,24 +56,24 @@ const page = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               type="email"
-              placeholder="Email"
+              placeholder="Your Email"
+              className="bg-[#D9D9D9]/20 h-10 w-full drop-shadow-lg rounded-4xl p-3 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-[#75CFFF]"
+            />
+            <input
+              value={email2}
+              onChange={(e) => setEmail2(e.target.value)}
+              type="email"
+              placeholder="Recruiter Email"
               className="bg-[#D9D9D9]/20 h-10 w-full drop-shadow-lg rounded-4xl p-3 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-[#75CFFF]"
             />
 
             <input
               value={number}
               onChange={(e) => setNumber(e.target.value)}
-              type="text"
+              type="file"
               placeholder="Phone Number"
-              className="bg-[#D9D9D9]/20 h-10 w-full drop-shadow-lg rounded-4xl p-3 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-[#75CFFF]"
+              className="bg-[#D9D9D9]/20 h-50 w-full drop-shadow-lg rounded-4xl p-3 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-[#75CFFF]"
             />
-
-            <textarea
-              value={pesan}
-              onChange={(e) => setPesan(e.target.value)}
-              placeholder="Message"
-              className="bg-[#D9D9D9]/20 h-40 w-full drop-shadow-lg p-3 rounded-4xl text-sm sm:text-base resize-none focus:outline-none focus:ring-2 focus:ring-[#75CFFF]"
-            ></textarea>
 
             <button
               type="submit"
