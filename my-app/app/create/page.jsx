@@ -5,20 +5,19 @@ import React, { useState } from 'react'
 const page = () => {
 
     const [name, setName] = useState('')
-        const [email, setEmail] = useState('')
-        const [email2, setEmail2] = useState('')
-        const [number, setNumber] = useState('')
-        const [pesan, setPesan] = useState('')
+        const [email, setEmail] = useState('') //email pengirim
+        const [email2, setEmail2] = useState('') //email penerima
+        const [video, setVideo] = useState('')
     
         const onSubmited = async (e) => {
             e.preventDefault()
             console.log('berhasil ngirim data', name)
     
             try {
-            const res = await fetch('/api/contact', {
+            const res = await fetch('/api/upload', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ name, email, number, pesan }),
+                body: JSON.stringify({ name, email, email2 }),
             })
     
             if (res.ok) {
@@ -68,9 +67,10 @@ const page = () => {
             />
 
             <input
-              value={number}
-              onChange={(e) => setNumber(e.target.value)}
+              value={video}
+              onChange={(e) => setVideo(e.target.value)}
               type="file"
+              accept='video'
               placeholder="Phone Number"
               className="bg-[#D9D9D9]/20 h-50 w-full drop-shadow-lg rounded-4xl p-3 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-[#75CFFF]"
             />
