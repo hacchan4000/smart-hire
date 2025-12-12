@@ -24,31 +24,33 @@ const page = () => {
             formData.append("name", name)
             formData.append("email", email)
             formData.append("email2", email2)
-            formData.append("video", video)
+            formData.append("file", video)
 
-            const res = await fetch('/api/submit', {
+             const res = await fetch('http://localhost:8001/predict-video', {
                 method: 'POST',
-                body: formData, // ❗ NO HEADERS — browser sets them automatically
-            })
+                body: formData,
+              })
 
             if (res.ok) {
-                alert("Video & data sent successfully!")
-                setName('')
-                setEmail('')
-                setReviewerEmail('')
-                setNumber('')
-                setVideo(null)
+              const json = await res.json()
+              alert("Video & data sent successfully!\nResult: " + (json.result || json.message))
+              // reset
+              setName('')
+              setEmail('')
+              setEmail2('')
+              setVideo(null)
             } else {
-                alert("Failed to send")
+              const text = await res.text()
+              console.error("Failed response:", text)
+              alert("Failed to send: " + res.status)
             }
-
-        } catch (error) {
+          } catch (error) {
             console.error("Error:", error)
             alert("Something went wrong!")
+          } finally {
+            setLoading(false)
+          }
         }
-
-        setLoading(false)
-    }
 
   return (
     <div className='relative w-full h-screen bg-[#0039C8] justify-center items-center flex-col text-white'>
@@ -85,7 +87,7 @@ const page = () => {
             <input
               onChange={(e) => setVideo(e.target.files[0])}
               type="file"
-              placeholder="Video/*"
+              placeholder="video/*"
               className="bg-[#D9D9D9]/20 h-50 w-full drop-shadow-lg rounded-4xl p-3 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-[#75CFFF]"
             />
 
